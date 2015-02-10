@@ -4,12 +4,9 @@ var pigLatin = function(phrase) {
   word_array.forEach(function (word) {
 
     var letter_array = word.split("");
-    debugger;
     var vowel_found = false;
 
-
     (word.split("")).forEach(function(letter) {
-      debugger;
       if ((/[aeioAEIO]/.test(letter))
       || ((/[uU]/.test(letter)) && (letter_array[letter_array.length - 1] !== 'q'))) {
         vowel_found = true;
@@ -28,3 +25,14 @@ var pigLatin = function(phrase) {
   });
   return output_array.join(" ");
 };
+
+$(document).ready(function() {
+  $("form#phrase").submit(function(event) {
+    var english_phrase = $("input#english-phrase").val();
+    var translation = pigLatin(english_phrase);
+    $(".translated-phrase").text(translation);
+
+    $("#translation").show();
+    event.preventDefault();
+  });
+});
